@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="imageNameInput" placeholder="Enter image name" />
+    <button onclick="getImageUrl(document.getElementById('imageNameInput').value)">Get Image</button>
+    <img id="displayedImage" alt="Firebase Image" />  
+    <script type="module">
+        import { initializeApp } from "firebase/app";
+        import { getStorage, ref, uploadBytes } from "firebase/storage";
+        const app = initializeApp(firebaseConfig);
+        const storage = getStorage(app);
+        // Select file input
+        const fileInput = document.getElementById('fileInput');
+
+        // Listen for file selection
+        fileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            // Create a storage reference
+            const storageRef = ref(storage, 'images/' + file.name);
+
+            // Upload file
+            uploadBytes(storageRef, file).then((snapshot) => {
+            console.log('Uploaded a blob or file!', snapshot);
+            }).catch((error) => {
+            console.error('Upload failed', error);
+            });
+        }
+        });
+     
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBZ5Ykiezkmf-O8MDEzRqDe_0bk8ElaJ3Y",
+            authDomain: "test-71416.firebaseapp.com",
+            projectId: "test-71416",
+            storageBucket: "test-71416.appspot.com",
+            messagingSenderId: "1003497987038",
+            appId: "1:1003497987038:web:23867be1f1b513d1681b4f",
+            measurementId: "G-782LF418MC"
+        };
+
+        // Initialize Firebase
+
+        // Function to get image URL
+        function getImageUrl(imageName) {
+        // Create a reference to the file we want to download
+        const storageRef = ref(storage, 'images/' + imageName);
+
+        // Get the download URL
+        getDownloadURL(storageRef)
+            .then((url) => {
+            // `url` is the download URL for the file
+            console.log('Image URL:', url);
+            // Insert the URL into an <img> tag to display the image
+            const imgElement = document.getElementById('displayedImage');
+            imgElement.src = url;
+            })
+            .catch((error) => {
+            // Handle any errors
+            console.error('Error fetching image URL:', error);
+            });
+        }
+        // Bind the getImageUrl function to the button click event
+        document.querySelector('button').addEventListener('click', () => {
+        const imageName = document.getElementById('imageNameInput').value;
+        getImageUrl(imageName);
+        });
+        
+    </script>      
+</body>
+</html>
