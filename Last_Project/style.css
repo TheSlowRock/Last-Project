@@ -1,0 +1,41 @@
+body{
+    background: url('https://static.vecteezy.com/system/resources/previews/002/376/764/non_2x/beautiful-sunset-on-summer-background-free-vector.jpg');
+    color: black;
+}
+.container{
+    width: 30%;
+    border: 2px solid black;
+    height: 500px;
+    margin-top: 5%;
+    border-radius: 30px;
+    background: linear-gradient(rgb(255,238,158),rgb(246,106,105));
+}
+.title{
+    font-size: 42px;
+    text-align: center;
+}
+.form-control{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: none;
+}
+#sign-up-btn, #sign-in-btn{
+    margin-top: 10%;
+}
+#sign-in-form{
+    position: absolute;
+    margin-top: -100%;
+}
+.small-text{
+    margin-top: 5%;
+}
+.form-group{
+    transition-duration: 0.4s;
+}
+#sign-up-form, #sign-in-form{
+    position: absolute;
+    margin-left: 35%;
+    display: block;
+    transition-duration: 0.7s;
+}
